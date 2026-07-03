@@ -1,0 +1,57 @@
+---
+/* src/pages/404.astro */
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="404 - Not Found" 
+  description="Página no encontrada / Page not found"
+>
+  <main class="fondo-default" style="min-height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem;">
+    
+    <h1 style="font-size: clamp(5rem, 15vw, 10rem); line-height: 1; margin-bottom: 0.5rem; letter-spacing: -0.05em; color: var(--titulos-default-color);">
+      404
+    </h1>
+    
+    <!-- Contenedores de texto (El script mostrará solo el adecuado) -->
+    <div id="text-es" style="display: none;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--titulos-default-color);">Página no encontrada</h2>
+      <p style="font-size: 1.1rem; opacity: 0.8; margin-bottom: 2.5rem;">Te estamos redirigiendo al inicio...</p>
+    </div>
+
+    <div id="text-en" style="display: none;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--titulos-default-color);">Page not found</h2>
+      <p style="font-size: 1.1rem; opacity: 0.8; margin-bottom: 2.5rem;">We are redirecting you to the homepage...</p>
+    </div>
+
+    <!-- Botón de respaldo por si el usuario no quiere esperar -->
+    <a href="/" class="btn-principal" id="btn-back">
+      <!-- El texto se inyecta con JS -->
+    </a>
+
+  </main>
+</Layout>
+
+<script>
+  // 1. Detectar el idioma del navegador del visitante
+  const userLang = navigator.language || navigator.userLanguage || 'en';
+  
+  // 2. Elementos del DOM
+  const textEs = document.getElementById('text-es');
+  const textEn = document.getElementById('text-en');
+  const btnBack = document.getElementById('btn-back');
+
+  // 3. Lógica de visualización
+  if (userLang.toLowerCase().startsWith('es')) {
+    if (textEs) textEs.style.display = 'block';
+    if (btnBack) btnBack.innerHTML = 'Volver al Inicio';
+  } else {
+    if (textEn) textEn.style.display = 'block';
+    if (btnBack) btnBack.innerHTML = 'Return Home';
+  }
+
+  // 4. Redirección automática al "semáforo" (raíz) después de 3.5 segundos
+  setTimeout(() => {
+    window.location.replace('/');
+  }, 3500);
+</script>

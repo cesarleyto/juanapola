@@ -1,26 +1,55 @@
 ---
-/* src/pages/index.astro */
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import LastPost from '../components/LastPost.astro';
-import Cta from '../components/Cta.astro';
+// src/pages/index.astro
+// Importamos tus datos base (español por defecto)
 import settings from '../data/settings.json';
-
-const nameProyecto = settings?.title || "Inicio";
-const descGeneral = settings?.description || "";
-const SEOTitle = `${nameProyecto} | ${descGeneral}`;
+import portada from '../data/portada.json';
 ---
 
-<Layout title={SEOTitle} description={descGeneral}>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <Hero />
+  <title>{settings.title}</title>
+  <meta name="description" content={settings.description}>
+  <meta name="keywords" content={settings.keywords}>
 
-  <main class="page-container" style="max-width: 1200px; margin: 8rem auto 6rem; padding: 0 1.5rem; display: flex; flex-direction: column; gap: 6rem;">
+  <!-- Open Graph / Redes Sociales (Facebook, WhatsApp) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content={settings.title}>
+  <meta property="og:description" content={settings.description}>
+  <meta property="og:image" content={new URL(portada.image, Astro.url)}>
+  <meta property="og:url" content={Astro.url}>
+
+  <!-- Twitter Card -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content={Astro.url} />
+  <meta property="twitter:title" content={settings.title} />
+  <meta property="twitter:description" content={settings.description} />
+  <meta property="twitter:image" content={new URL(portada.image, Astro.url)} />
+
+  <!-- hreflang para Google -->
+  <link rel="alternate" hreflang="es" href={new URL('/es/', Astro.url)} />
+  <link rel="alternate" hreflang="en" href={new URL('/en/', Astro.url)} />
+  <link rel="alternate" hreflang="x-default" href={new URL('/es/', Astro.url)} />
+
+  <!-- Redirección para navegadores antiguos -->
+  <meta http-equiv="refresh" content="0;url=/es/" />
+
+  <script>
+    // Detecta el idioma del navegador del usuario
+    const userLang = navigator.language || navigator.userLanguage;
     
-    <LastPost />
-
-    <Cta />
-
-  </main>
-
-</Layout>
+    // Si su navegador está en inglés, mándalo a /en/, si no, a /es/
+    if (userLang.startsWith('en')) {
+      window.location.replace('/en/');
+    } else {
+      window.location.replace('/es/');
+    }
+  </script>
+</head>
+<body>
+  <p>Redirigiendo a <a href="/es/">la página principal...</a></p>
+</body>
+</html>

@@ -1,12 +1,11 @@
 /* src/styles/global.css */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 :root {
   /* --- COLORES BASE --- */
   --default-color: #ffffff;
-  --default-color-similar: #eaeaea;
+  --default-color-similar: #ededed;
   
-  --color-acento: #eaeaea;
+  --color-acento: #ededed;
   --color-acento2: #ffffff;
 
   /* --- TÍTULOS --- */
@@ -20,7 +19,7 @@
   --texto-color-acento2: #000000;
 
   /* --- FUENTES --- */
-  --font-main: 'Montserrat', sans-serif;
+  --font-main: 'Space Mono', monospace;
   --font-mono: 'Space Mono', monospace;
 
   /* --- FORMAS --- */
@@ -40,6 +39,29 @@ body {
   font-family: var(--font-main);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================
+   ENLACES GENERALES (Markdown y Textos libres)
+   ========================================== */
+/* 1. Aplica estilo solo a enlaces puros (excluye botones, navs y tarjetas) */
+a:not(.btn-principal):not(.btn-outline):not(.nav-link):not(.social-nav-link):not(.blog-card) {
+  color: inherit; /* Hereda el color negro o blanco de tu máquina de contraste */
+  text-decoration: underline;
+  text-decoration-color: inherit;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  transition: opacity 0.3s ease;
+}
+
+/* 2. Mata el espantoso color morado de "enlace visitado" */
+a:visited:not(.btn-principal):not(.btn-outline):not(.nav-link):not(.social-nav-link):not(.blog-card) {
+  color: inherit;
+}
+
+/* 3. Hover sutil y elegante de galería de arte */
+a:hover:not(.btn-principal):not(.btn-outline):not(.nav-link):not(.social-nav-link):not(.blog-card) {
+  opacity: 0.5;
 }
 
 /* ==========================================

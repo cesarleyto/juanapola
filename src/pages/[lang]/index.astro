@@ -1,0 +1,22 @@
+---
+/* src/pages/[lang]/index.astro */
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import LastPost from '../../components/LastPost.astro';
+import Cta from '../../components/Cta.astro';
+
+export async function getStaticPaths() {
+  return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
+}
+
+// lang ya está disponible desde la URL gracias a [lang]
+const { lang } = Astro.params;
+---
+
+<Layout>
+  <Hero />
+  <main class="page-container" style="max-width: 1200px; margin: 8rem auto 6rem; padding: 0 1.5rem; display: flex; flex-direction: column; gap: 6rem;">
+    <LastPost />
+    <Cta />
+  </main>
+</Layout>

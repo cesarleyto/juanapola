@@ -2,22 +2,18 @@
   "showSocials": true,
   "enlaces": [
     {
-      "texto": "Inicio",
-      "url": "/"
+      "texto": "INICIO",
+      "url": "/es/"
     },
     {
-      "texto": "Sobre Mi",
-      "url": "/sobre-mi"
-    },
-    {
-      "texto": "Blog",
-      "url": "/blog"
+      "texto": "SOBRE MI",
+      "url": "/es/juanapola"
     }
   ],
   "botones": [
     {
-      "texto": "¡Agenda vía WhatsApp!",
-      "url": "https://wa.me/529710000000"
+      "texto": "PORTAFOLIO",
+      "url": "/es/blog"
     }
   ]
 }

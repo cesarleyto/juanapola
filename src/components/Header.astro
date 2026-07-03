@@ -1,16 +1,28 @@
 ---
 /* src/components/Header.astro */
-import nav from '../data/nav.json';
-import settings from '../data/settings.json';
+const pathname = Astro.url.pathname;
+const isSpanish = pathname.startsWith('/es/');
+const lang = isSpanish ? 'es' : 'en';
+const otherLang = isSpanish ? 'en' : 'es';
+
+const switchUrl = pathname.replace(`/${lang}/`, `/${otherLang}/`);
+const switchLabel = isSpanish ? 'English' : 'Español';
+const rootUrl = `/${lang}/`;
+
+// Importar navegadores duales
+const navFiles = import.meta.glob('../data/nav*.json', { eager: true });
+const navObj = (navFiles[`../data/nav-${lang}.json`] || navFiles['../data/nav.json']) as any;
+const nav = navObj.default || navObj;
+
+// Importar settings duales
+const settingsFiles = import.meta.glob('../data/settings*.json', { eager: true });
+const settingsObj = (settingsFiles[`../data/settings-${lang}.json`] || settingsFiles['../data/settings.json']) as any;
+const settings = settingsObj.default || settingsObj;
 
 const enlaces = nav?.enlaces || [];
 const botones = nav?.botones || [];
 const redes = settings?.redes || [];
 
-// Detectar página activa
-const pathname = Astro.url.pathname;
-
-// SOPORTE TOTAL PARA LAS 7 REDES SOCIALES DEL FORMULARIO
 const getSocialSvg = (platform: string) => {
   const p = platform.toLowerCase();
   if (p.includes('facebook')) return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>';
@@ -25,90 +37,63 @@ const getSocialSvg = (platform: string) => {
 ---
 
 <div class="header-wrapper">
-  
   <header class="nav-capsule">
-    
     <div class="nav-desktop-only">
-      <a href="/" style="display: flex; align-items: center;">
-        <img src="/assets/logo/logo.svg" alt={settings.title} style="height: 28px; width: auto;" />
-      </a>
-
-      <nav style="display: flex; gap: 1.5rem; align-items: center;">
-        {enlaces.map((enlace) => {
-          const isActive = pathname === enlace.url || (pathname.startsWith(enlace.url) && enlace.url !== '/');
-          return (
-            <a href={enlace.url} class={`nav-link ${isActive ? 'active' : ''}`}>
-              {enlace.texto}
-            </a>
-          );
-        })}
-      </nav>
-
-      <div style="display: flex; gap: 1rem; align-items: center;">
-        {botones.map((boton) => (
-          <a href={boton.url} class="btn-principal">
-            <span>{boton.texto}</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </a>
-        ))}
+      <div class="nav-left">
+        <a href={rootUrl} class="logo-link" style="display: flex; align-items: center; margin-left: -4px;">
+          <img src="/assets/logo/logo.svg" alt={settings.title} style="height: 48px; width: auto;" />
+        </a>
       </div>
-
-      <div style="display: flex; gap: 0.75rem; align-items: center; padding-right: 1rem; padding-left: 0.5rem;">
-        {redes.map((red: any) => (
-          <a href={red.url} target="_blank" rel="noopener noreferrer" class="social-nav-link" aria-label={red.red} set:html={getSocialSvg(red.red)} />
-        ))}
+      <div class="nav-center">
+        <nav style="display: flex; gap: 1.5rem; align-items: center;">
+          {enlaces.map((e: any) => {
+            const isActive = pathname === e.url || (pathname.startsWith(e.url) && e.url !== rootUrl);
+            return <a href={e.url} class={`nav-link ${isActive ? 'active' : ''}`}>{e.texto}</a>
+          })}
+        </nav>
+        <div style="display: flex; gap: 1rem; align-items: center;">
+          {botones.map((b: any) => (
+            <a href={b.url} class="btn-principal">
+              <span>{b.texto}</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          ))}
+        </div>
+      </div>
+      <div class="nav-right">
+        <div style="display: flex; gap: 0.75rem; align-items: center; padding-right: 1rem;">
+          {redes.map((r: any) => <a href={r.url} target="_blank" rel="noopener noreferrer" class="social-nav-link" aria-label={r.red} set:html={getSocialSvg(r.red)} />)}
+          <a href={switchUrl} class="btn-outline lang-switch"><span>{switchLabel}</span></a>
+        </div>
       </div>
     </div>
 
     <div class="nav-mobile-only" style="gap: 0.5rem;">
       <button class="hamburger-btn menu-toggle" aria-label="Abrir Menú">
-        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
       </button>
-
-      <button class="menu-toggle" style="background:none; border:none; cursor:pointer; display: flex; align-items: center;" aria-label="Abrir Menú">
-        <img src="/assets/logo/logo.svg" alt={settings.title} style="height: 24px; width: auto;" />
+      <button class="logo-link menu-toggle" style="background:none; border:none; cursor:pointer; display: flex; align-items: center; margin-left: -4px;" aria-label="Abrir Menú">
+        <img src="/assets/logo/logo.svg" alt={settings.title} style="height: 36px; width: auto;" />
       </button>
     </div>
-
   </header>
 </div>
 
 <div id="mobileMenu" class="mobile-menu-modal">
   <div class="mobile-menu-content">
-    
     <button class="close-menu-btn menu-toggle" aria-label="Cerrar Menú">
-      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
-      </svg>
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
     </button>
-
+    
     <nav class="mobile-nav-links">
-      {enlaces.map((enlace) => (
-        <a href={enlace.url} class="nav-link menu-toggle-link" style="font-size: 1.25rem;">{enlace.texto}</a>
-      ))}
+      {enlaces.map((e: any) => <a href={e.url} class="nav-link menu-toggle-link">{e.texto}</a>)}
+      {botones.map((b: any) => <a href={b.url} class="btn-principal menu-toggle-link"><span>{b.texto}</span></a>)}
+      <a href={switchUrl} class="btn-outline menu-toggle-link lang-switch">{switchLabel}</a>
     </nav>
 
-    <div class="mobile-nav-buttons">
-      {botones.map((boton) => (
-        <a href={boton.url} class="btn-principal menu-toggle-link">
-          <span>{boton.texto}</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </a>
-      ))}
-    </div>
-
     <div class="mobile-nav-socials">
-      {redes.map((red: any) => (
-        <a href={red.url} target="_blank" rel="noopener noreferrer" class="social-nav-link" set:html={getSocialSvg(red.red)} />
-      ))}
+      {redes.map((r: any) => <a href={r.url} target="_blank" rel="noopener noreferrer" class="social-nav-link" set:html={getSocialSvg(r.red)} />)}
     </div>
-
   </div>
 </div>
 
@@ -116,79 +101,40 @@ const getSocialSvg = (platform: string) => {
   const toggles = document.querySelectorAll('.menu-toggle');
   const links = document.querySelectorAll('.menu-toggle-link');
   const modal = document.getElementById('mobileMenu');
-
-  toggles.forEach(toggle => {
-    toggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      modal?.classList.toggle('open');
-      document.body.style.overflow = modal?.classList.contains('open') ? 'hidden' : '';
-    });
-  });
-
-  links.forEach(link => {
-    link.addEventListener('click', () => {
-      modal?.classList.remove('open');
-      document.body.style.overflow = '';
-    });
-  });
-
-  modal?.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-  });
+  toggles.forEach(t => t.addEventListener('click', (e) => { e.stopPropagation(); modal?.classList.toggle('open'); document.body.style.overflow = modal?.classList.contains('open') ? 'hidden' : ''; }));
+  links.forEach(l => l.addEventListener('click', () => { modal?.classList.remove('open'); document.body.style.overflow = ''; }));
+  modal?.addEventListener('click', (e) => { if (e.target === modal) { modal.classList.remove('open'); document.body.style.overflow = ''; } });
 </script>
 
 <style>
-  .header-wrapper {
-    width: 100%; display: flex; justify-content: center; position: sticky; top: 1.5rem; z-index: 100; padding: 0 1.5rem;
-  }
-  
-  .nav-desktop-only { display: flex; align-items: center; gap: 2rem; }
+  .lang-switch { cursor: pointer; text-transform: uppercase; padding: 0.4rem 0.8rem; font-size: 0.8rem; }
+  .logo-link img { transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
+  .logo-link:hover img { transform: scale(1.08); }
+  .header-wrapper { width: 100%; display: flex; justify-content: center; position: sticky; top: 0; z-index: 100; padding: 0; }
+  :global(.nav-capsule) { width: 100%; padding: 1.5rem 3rem; border-radius: 0; background: var(--default-color, #fff); box-shadow: 0 8px 24px rgba(0,0,0,0.06); display: flex; }
+  .nav-desktop-only { display: flex; align-items: center; width: 100%; }
+  .nav-left { flex: 1; justify-content: flex-start; display: flex; }
+  .nav-center { flex: 1; justify-content: center; align-items: center; gap: 2rem; display: flex; }
+  .nav-right { flex: 1; justify-content: flex-end; display: flex; }
   .nav-mobile-only { display: none; align-items: center; }
-  
-  .hamburger-btn {
-    background: none; border: none; color: var(--titulos-default-color, #000); cursor: pointer; display: flex; align-items: center;
-  }
-
-  .mobile-menu-modal {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-    background: rgba(0,0,0,0.5); z-index: 1000;
-    opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-    display: flex; justify-content: center; align-items: center; padding: 1.5rem;
-  }
+  .hamburger-btn { background: none; border: none; color: var(--titulos-default-color, #000); cursor: pointer; display: flex; align-items: center; }
+  .mobile-menu-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.5); z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; display: flex; justify-content: center; align-items: center; padding: 1.5rem; }
   .mobile-menu-modal.open { opacity: 1; pointer-events: auto; }
-
-  .mobile-menu-content {
-    background-color: var(--default-color, #fff); border-radius: var(--radius-card, 24px);
-    padding: 3rem 2rem; width: 100%; max-width: 380px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    position: relative; transform: translateY(20px); transition: transform 0.3s ease;
-    display: flex; flex-direction: column; gap: 2rem; 
-    align-items: center; text-align: center;
-  }
+  .mobile-menu-content { background-color: var(--default-color, #fff); border-radius: var(--radius-card, 24px); padding: 3rem 2rem; width: 100%; max-width: 380px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); position: relative; transform: translateY(20px); transition: transform 0.3s ease; display: flex; flex-direction: column; gap: 2rem; align-items: center; text-align: center; }
   .mobile-menu-modal.open .mobile-menu-content { transform: translateY(0); }
-
-  .close-menu-btn {
-    position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none;
-    color: var(--texto-default-color, #000); cursor: pointer;
-  }
-
-  .mobile-nav-links { display: flex; flex-direction: column; gap: 1.2rem; align-items: center; }
-  .mobile-nav-buttons { display: flex; flex-direction: column; gap: 0.8rem; align-items: center; }
+  .close-menu-btn { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; color: var(--texto-default-color, #000); cursor: pointer; }
+  
+  /* --- CENTRADO TOTAL EN MÓVIL --- */
+  .mobile-nav-links { display: flex; flex-direction: column; gap: 1.5rem; align-items: center; width: 100%; }
+  .menu-toggle-link { font-size: 1.1rem !important; text-align: center; display: inline-block; width: 100%; }
+  .btn-principal.menu-toggle-link, .btn-outline.menu-toggle-link { justify-content: center; width: auto; min-width: 220px; }
+  
   .mobile-nav-socials { display: flex; justify-content: center; gap: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(0,0,0,0.1); width: 100%; }
-
-  /* === RESPONSIVE === */
-  @media (max-width: 900px) {
+  
+  @media (max-width: 1000px) {
     .nav-desktop-only { display: none !important; }
     .nav-mobile-only { display: flex !important; }
-    
-    .header-wrapper { justify-content: flex-start !important; }
-    
-    :global(.nav-capsule) { 
-      width: max-content !important;
-      padding: 0.5rem 1rem !important; 
-    }
+    .header-wrapper { top: 1.5rem; padding: 0 1.5rem; justify-content: flex-start !important; }
+    :global(.nav-capsule) { width: max-content !important; padding: 0.75rem 1.25rem !important; border-radius: 50px !important; box-shadow: 0 10px 30px rgba(0,0,0,0.08) !important; }
   }
 </style>

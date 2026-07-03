@@ -1,0 +1,10 @@
+{
+  "showSocials": true,
+  "enlaces": [
+    { "texto": "HOME", "url": "/en/" },
+    { "texto": "ABOUT ME", "url": "/en/juanapola" }
+  ],
+  "botones": [
+    { "texto": "PORTFOLIO", "url": "/en/blog" }
+  ]
+}

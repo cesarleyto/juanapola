@@ -1,0 +1,156 @@
+---
+/* src/pages/[lang]/[slug].astro */
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const todasLasPaginas = await getCollection('paginas');
+  return todasLasPaginas.map((pagina: any) => {
+    const parts = pagina.id.split('/');
+    const lang = parts[0]; 
+    const slug = parts.slice(1).join('/') || parts[0];
+    return {
+      params: { lang, slug },
+      props: { pagina, lang },
+    };
+  });
+}
+
+const { pagina, lang } = Astro.props;
+const { Content } = await render(pagina);
+
+const formatDate = (date: Date) => {
+  if (!date) return "";
+  return new Intl.DateTimeFormat(lang === 'en' ? 'en-US' : 'es-ES', { 
+    year: 'numeric', month: 'long', day: 'numeric' 
+  }).format(new Date(date));
+};
+
+const titleWords = pagina.data.title ? pagina.data.title.split(' ') : [];
+const labelUpdate = lang === 'en' ? 'Last updated:' : 'Última actualización:';
+const labelBack = lang === 'en' ? 'Back to Home' : 'Volver al Inicio';
+---
+
+<Layout title={pagina.data.title} description={pagina.data.description} image={pagina.data.heroImage}>
+  
+  <div class="page-container" style="max-width: 950px; margin: 3rem auto 6rem; padding: 0 1.5rem; display: flex; flex-direction: column; gap: 3.5rem;">
+    
+    {/* HERO DIVIDIDO 50/50 CON DETALLES TIPOGRÁFICOS AVANZADOS */}
+    <div class="page-hero-split">
+      {pagina.data.heroImage && (
+        <div class="hero-image-half">
+          <img src={pagina.data.heroImage} alt={pagina.data.title} class="hero-split-img" />
+        </div>
+      )}
+      <div class="hero-text-half">
+        <h1 class="hero-title-split">
+          {titleWords.map((word: string) => (
+            <span class="title-word-line">{word}</span>
+          ))}
+        </h1>
+      </div>
+    </div>
+
+    <main class="content-block fondo-default" style="border-radius: var(--radius-card, 24px); box-shadow: 0 15px 40px rgba(0,0,0,0.04); padding: 4rem 3.5rem;">
+      <article class="contenido-cliente">
+        <Content />
+      </article>
+
+      {pagina.data.pubDate && (
+        <div style="margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid rgba(0,0,0,0.06); text-align: left;">
+          <p style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--texto-default-color); opacity: 0.6; margin: 0;">
+            {labelUpdate} {formatDate(pagina.data.pubDate)}
+          </p>
+        </div>
+      )}
+    </main>
+
+    <div style="display: flex; justify-content: center; width: 100%;">
+      <a href={`/${lang}/`} class="btn-outline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg);">
+          <line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+        <span>{labelBack}</span>
+      </a>
+    </div>
+
+  </div>
+</Layout>
+
+<style>
+  /* === HERO DIVIDIDO 50/50 === */
+  .page-hero-split {
+    display: flex;
+    align-items: center;
+    gap: 4vw; 
+    width: 100%;
+    flex-direction: row; 
+  }
+
+  .hero-image-half {
+    width: 50%;
+    flex-shrink: 0;
+    aspect-ratio: 9 / 16;
+    border-radius: var(--radius-card, 24px);
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+    position: relative;
+  }
+
+  .hero-split-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .page-hero-split:hover .hero-split-img {
+    transform: scale(1.06);
+  }
+
+  .hero-text-half {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-title-split {
+    color: var(--titulos-default-color, #000); 
+    margin: 0; 
+    text-align: left;
+    line-height: 0.95;
+    font-size: clamp(2.55rem, 7vw, 5.6rem); 
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+  }
+
+  .title-word-line {
+    display: block;
+    width: 100%;
+  }
+
+  /* === ESTILOS INTERNOS DEL MARKDOWN === */
+  .contenido-cliente :global(p) { 
+    margin-bottom: 1.5rem; 
+    font-size: 1.1rem; 
+    opacity: 0.9; 
+  }
+  
+  .contenido-cliente :global(p:has(img)) { 
+    opacity: 1 !important; 
+  }
+
+  .contenido-cliente :global(h2), .contenido-cliente :global(h3) { 
+    margin-top: 2.5rem; 
+    margin-bottom: 1rem; 
+    color: var(--titulos-default-color); 
+  }
+  
+  .contenido-cliente :global(img) { 
+    border-radius: var(--radius-sm, 8px); 
+    margin: 2rem 0; 
+    width: 100%; 
+    display: block; 
+  }
+</style>

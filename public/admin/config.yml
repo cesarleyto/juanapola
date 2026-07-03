@@ -1,9 +1,9 @@
 backend:
   name: github
-  repo: cesarleyto/template
+  repo: cesarleyto/juanapola
   branch: main
 
-# Carpeta de imágenes por default
+# Carpetas de imágenes por default
 media_folder: "public/assets/images"
 public_folder: "/assets/images"
 
@@ -12,55 +12,73 @@ logo_url: "/assets/logo/logocms.svg"
 
 collections:
   # ==========================================
-  # 1. AJUSTES GLOBALES (Settings, Nav, Portada, Destacado)
+  # 1. AJUSTES GLOBALES (Español)
   # ==========================================
-  - name: "configuracion"
-    label: "⚙️ Ajustes"
+  - name: "ajustes_es"
+    label: "⚙️ Ajustes (Español)"
     editor:
       preview: false
     files:
+      - label: "Traducciones UI"
+        name: "translate"
+        file: "src/data/translate.json"
+        fields:
+          - label: "Textos en Español"
+            name: "es"
+            widget: "object"
+            fields:
+              - { label: "Botón Leer más", name: "leerMas", widget: "string" }
+              - { label: "Botón Portafolio", name: "portafolioCompleto", widget: "string" }
+          - label: "Textos en Inglés"
+            name: "en"
+            widget: "object"
+            fields:
+              - { label: "Botón Read more", name: "leerMas", widget: "string" }
+              - { label: "Botón Full portfolio", name: "portafolioCompleto", widget: "string" }
+
       - label: "Datos Generales"
         name: "general"
         file: "src/data/settings.json"
         fields:
           - { label: "Título del Proyecto", name: "title", widget: "string" }
-          - { label: "Descripción SEO", name: "description", widget: "text", default: "Bienvenido al template inicial de yaga.haus" }
+          - { label: "Descripción SEO", name: "description", widget: "text" }
           - { label: "Palabras Clave", name: "keywords", widget: "string", required: false }
-          - { label: "Dirección (Google Maps)", name: "address", widget: "string", required: false }
+          - { label: "Dirección", name: "address", widget: "string", required: false }
           - { label: "Email de Contacto", name: "email", widget: "string", required: false }
-          - label: "Canales de Contacto Directo"
+          - label: "Teléfonos / WhatsApp"
             name: "telefonos"
             widget: "list"
+            required: false
             fields:
-              - { label: "Tipo de Contacto", name: "tipo", widget: "select", options: ["Llamada", "WhatsApp", "Telegram"] }
-              - { label: "Texto del Botón", name: "nombre", widget: "string", hint: "Ej: WhatsApp Urgencias, o Llamar a Recepción" }
-              - { label: "Número (Sin espacios)", name: "numero", widget: "string", hint: "Con clave de país, México (52). Ej: 529711045697" }
+              - { label: "Tipo", name: "tipo", widget: "select", options: ["Llamada", "WhatsApp", "Telegram"] }
+              - { label: "Nombre", name: "nombre", widget: "string" }
+              - { label: "Número", name: "numero", widget: "string" }
           - label: "Redes Sociales"
             name: "redes"
             widget: "list"
             required: false
             fields:
               - { label: "Red", name: "red", widget: "select", options: ["Facebook", "Instagram", "TikTok", "Spotify", "LinkedIn", "X", "YouTube"] }
-              - { label: "URL de la cuenta", name: "url", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
 
       - label: "Navegación (Menú)"
         name: "nav"
         file: "src/data/nav.json"
         fields:
-          - { label: "Mostrar Redes Sociales en menú", name: "showSocials", widget: "boolean", default: true }
+          - { label: "Mostrar Redes Sociales", name: "showSocials", widget: "boolean", default: true }
           - label: "Enlaces Simples"
             name: "enlaces"
             widget: "list"
             required: false
             fields:
               - { label: "Texto", name: "texto", widget: "string" }
-              - { label: "URL (Ej: /sobre-nosotros)", name: "url", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
           - label: "Botones Principales"
             name: "botones"
             widget: "list"
             required: false
             fields:
-              - { label: "Texto del Botón", name: "texto", widget: "string" }
+              - { label: "Texto", name: "texto", widget: "string" }
               - { label: "URL", name: "url", widget: "string" }
 
       - label: "Portada (Home)"
@@ -69,8 +87,8 @@ collections:
         fields:
           - { label: "Título Principal", name: "title", widget: "string" }
           - { label: "Descripción", name: "description", widget: "text", required: false }
-          - { label: "Imagen de Portada", name: "image", widget: "image", required: false }
-          - label: "Botones de Portada"
+          - { label: "Imagen", name: "image", widget: "image", required: false }
+          - label: "Botones"
             name: "botones"
             widget: "list"
             required: false
@@ -78,14 +96,14 @@ collections:
               - { label: "Texto", name: "texto", widget: "string" }
               - { label: "URL", name: "url", widget: "string" }
 
-      - label: "Sección Destacada"
+      - label: "Destacado"
         name: "destacado"
         file: "src/data/destacado.json"
         fields:
-          - { label: "Título Destacado", name: "title", widget: "string" }
+          - { label: "Título", name: "title", widget: "string" }
           - { label: "Descripción", name: "description", widget: "text", required: false }
-          - { label: "Imagen Destacada", name: "image", widget: "image", required: false }
-          - label: "Botones de Destacado"
+          - { label: "Imagen", name: "image", widget: "image", required: false }
+          - label: "Botones"
             name: "botones"
             widget: "list"
             required: false
@@ -97,14 +115,104 @@ collections:
         name: "blog_settings"
         file: "src/data/blog-settings.json"
         fields:
-          - { label: "Nombre del Blog", name: "title", widget: "string", default: "Nuestro Blog" }
-          - { label: "Descripción del Blog", name: "description", widget: "text" }
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "Descripción", name: "description", widget: "text" }
 
   # ==========================================
-  # 2. SISTEMA RELACIONAL (Categorías y Autores)
+  # 2. AJUSTES GLOBALES (Inglés)
+  # ==========================================
+  - name: "ajustes_en"
+    label: "⚙️ Ajustes (Inglés)"
+    editor:
+      preview: false
+    files:
+      - label: "Datos Generales (EN)"
+        name: "general_en"
+        file: "src/data/settings-en.json"
+        fields:
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "Descripción", name: "description", widget: "text" }
+          - { label: "Palabras Clave", name: "keywords", widget: "string", required: false }
+          - { label: "Dirección", name: "address", widget: "string", required: false }
+          - { label: "Email", name: "email", widget: "string", required: false }
+          - label: "Teléfonos"
+            name: "telefonos"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Tipo", name: "tipo", widget: "select", options: ["Llamada", "WhatsApp", "Telegram"] }
+              - { label: "Nombre", name: "nombre", widget: "string" }
+              - { label: "Número", name: "numero", widget: "string" }
+          - label: "Redes Sociales"
+            name: "redes"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Red", name: "red", widget: "select", options: ["Facebook", "Instagram", "TikTok", "Spotify", "LinkedIn", "X", "YouTube"] }
+              - { label: "URL", name: "url", widget: "string" }
+
+      - label: "Navegación (EN)"
+        name: "nav_en"
+        file: "src/data/nav-en.json"
+        fields:
+          - { label: "Mostrar Redes", name: "showSocials", widget: "boolean", default: true }
+          - label: "Enlaces"
+            name: "enlaces"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Texto", name: "texto", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+          - label: "Botones"
+            name: "botones"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Texto", name: "texto", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+
+      - label: "Portada (EN)"
+        name: "portada_en"
+        file: "src/data/portada-en.json"
+        fields:
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "Descripción", name: "description", widget: "text", required: false }
+          - { label: "Imagen", name: "image", widget: "image", required: false }
+          - label: "Botones"
+            name: "botones"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Texto", name: "texto", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+
+      - label: "Destacado (EN)"
+        name: "destacado_en"
+        file: "src/data/destacado-en.json"
+        fields:
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "Descripción", name: "description", widget: "text", required: false }
+          - { label: "Imagen", name: "image", widget: "image", required: false }
+          - label: "Botones"
+            name: "botones"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Texto", name: "texto", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+
+      - label: "Ajustes del Blog (EN)"
+        name: "blog_settings_en"
+        file: "src/data/blog-settings-en.json"
+        fields:
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "Descripción", name: "description", widget: "text" }
+
+  # ==========================================
+  # 3. SISTEMA RELACIONAL (Categorías y Autores)
   # ==========================================
   - name: "categorias"
-    label: "🏷️ Categorías del Blog"
+    label: "🏷️ Categorías"
     folder: "src/data/categorias"
     create: true
     slug: "{{slug}}"
@@ -122,9 +230,9 @@ collections:
     identifier_field: "name"
     fields:
       - { label: "Nombre del Autor", name: "name", widget: "string" }
-      - { label: "Descripción Profesional", name: "description", widget: "string" }
-      - { label: "Avatar / Foto", name: "avatar", widget: "image", required: false }
-      - label: "Redes Sociales del Autor"
+      - { label: "Descripción", name: "description", widget: "string" }
+      - { label: "Avatar", name: "avatar", widget: "image", required: false }
+      - label: "Redes"
         name: "redes"
         widget: "list"
         required: false
@@ -133,39 +241,67 @@ collections:
           - { label: "URL", name: "url", widget: "string" }
 
   # ==========================================
-  # 3. CONSTRUCTORES DE CONTENIDO (Páginas y Blog)
+  # 4. CONSTRUCTORES DE CONTENIDO (ESPAÑOL)
   # ==========================================
-  - name: "paginas"
-    label: "📄 Páginas"
-    folder: "src/content/paginas"
+  - name: "paginas_es"
+    label: "📄 Páginas (ES)"
+    folder: "src/content/paginas/es"
     media_folder: "/public/assets/images/paginas"
     public_folder: "/assets/images/paginas"
     create: true
-    slug: "{{fields.slug}}"
+    slug: "{{slug}}"
     fields:
       - { label: "Título de la Página", name: "title", widget: "string" }
-      - label: "Enlace de la página (URL)"
-        name: "slug"
-        widget: "string"
-        pattern: ['^[a-z0-9-]+$', "Error: Solo usa minúsculas, números y guiones medio. Sin espacios ni acentos."]
-        hint: "Ej: sobre-nosotros. Este será el link. Para ponerlo en tu Menú de Navegación escribirás: /sobre-nosotros"
-      - { label: "Descripción SEO (Obligatoria)", name: "description", widget: "text" }
-      - { label: "Fecha de publicación (Obligatoria)", name: "pubDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: true }
-      - { label: "Imagen de Portada (Opcional)", name: "heroImage", widget: "image", required: false }
+      - { label: "Descripción SEO", name: "description", widget: "text" }
+      - { label: "Fecha", name: "pubDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: true }
+      - { label: "Imagen", name: "heroImage", widget: "image", required: false }
       - { label: "Contenido", name: "body", widget: "markdown" }
 
-  - name: "blog"
-    label: "📝 Entradas de Blog"
-    folder: "src/content/blog"
+  - name: "blog_es"
+    label: "📝 Posteos (ES)"
+    folder: "src/content/blog/es"
     media_folder: "/public/assets/images/blog"
     public_folder: "/assets/images/blog"
     create: true
     slug: "{{slug}}"
     fields:
       - { label: "Título del post", name: "title", widget: "string" }
-      - { label: "Descripción SEO (Obligatoria)", name: "description", widget: "text" }
+      - { label: "Descripción SEO", name: "description", widget: "text" }
       - { label: "Autor", name: "author", widget: "relation", collection: "autores", search_fields: ["name"], value_field: "name", display_fields: ["name"], required: false }
       - { label: "Categoría", name: "category", widget: "relation", collection: "categorias", search_fields: ["title"], value_field: "title", display_fields: ["title"] }
-      - { label: "Fecha de publicación", name: "pubDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
-      - { label: "Imagen de Portada (Opcional)", name: "heroImage", widget: "image", required: false }
-      - { label: "Contenido del Post", name: "body", widget: "markdown" }
+      - { label: "Fecha", name: "pubDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Imagen", name: "heroImage", widget: "image", required: false }
+      - { label: "Contenido", name: "body", widget: "markdown" }
+
+  # ==========================================
+  # 5. CONSTRUCTORES DE CONTENIDO (INGLÉS)
+  # ==========================================
+  - name: "paginas_en"
+    label: "📄 Páginas (EN)"
+    folder: "src/content/paginas/en"
+    media_folder: "/public/assets/images/paginas"
+    public_folder: "/assets/images/paginas"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título de la Página", name: "title", widget: "string" }
+      - { label: "Descripción SEO", name: "description", widget: "text" }
+      - { label: "Fecha", name: "pubDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: true }
+      - { label: "Imagen", name: "heroImage", widget: "image", required: false }
+      - { label: "Contenido", name: "body", widget: "markdown" }
+
+  - name: "blog_en"
+    label: "📝 Posteos (EN)"
+    folder: "src/content/blog/en"
+    media_folder: "/public/assets/images/blog"
+    public_folder: "/assets/images/blog"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título del post", name: "title", widget: "string" }
+      - { label: "Descripción SEO", name: "description", widget: "text" }
+      - { label: "Autor", name: "author", widget: "relation", collection: "autores", search_fields: ["name"], value_field: "name", display_fields: ["name"], required: false }
+      - { label: "Categoría", name: "category", widget: "relation", collection: "categorias", search_fields: ["title"], value_field: "title", display_fields: ["title"] }
+      - { label: "Fecha", name: "pubDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Imagen", name: "heroImage", widget: "image", required: false }
+      - { label: "Contenido", name: "body", widget: "markdown" }

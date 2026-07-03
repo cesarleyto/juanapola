@@ -1,0 +1,18 @@
+{
+  "title": "Juana Pola | Visual Artist",
+  "description": "Official portfolio of Juana Pola, contemporary fine art photographer from the Isthmus of Tehuantepec. Explore her visual artwork and exhibitions, featuring profound narratives around women, sexual dissidence, and cultural identity.",
+  "keywords": "contemporary mexican photographer, oaxacan fine art photography, isthmus of tehuantepec artist, latin american visual artist, mexican indigenous contemporary art, women in photography mexico, juanapola portfolio",
+  "address": "Santo Domingo Tehuantepec, Oaxaca, Mexico",
+  "email": "hola@juanapola.com",
+  "telefonos": [
+    {
+      "tipo": "WhatsApp",
+      "nombre": "WhatsApp",
+      "numero": "529711552797"
+    }
+  ],
+  "redes": [
+    { "red": "Facebook", "url": "https://www.facebook.com/soyjuanapola" },
+    { "red": "Instagram", "url": "https://www.instagram.com/juana_pola" }
+  ]
+}
