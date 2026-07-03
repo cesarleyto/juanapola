@@ -51,7 +51,7 @@ const labelBack = lang === 'en' ? 'Back to Home' : 'Volver al Inicio';
       </div>
     </div>
 
-    <main class="content-block fondo-default" style="border-radius: var(--radius-card, 24px); box-shadow: 0 15px 40px rgba(0,0,0,0.04); padding: 4rem 3.5rem;">
+    <main class="content-block fondo-default" style="border-radius: var(--radius-card, 24px); box-shadow: 0 15px 40px rgba(0,0,0,0.04);">
       <article class="contenido-cliente">
         <Content />
       </article>
@@ -78,6 +78,9 @@ const labelBack = lang === 'en' ? 'Back to Home' : 'Volver al Inicio';
 </Layout>
 
 <style>
+  /* Margen amplio para pantallas grandes */
+  .content-block { padding: 4rem 3.5rem; }
+
   /* === HERO DIVIDIDO 50/50 === */
   .page-hero-split {
     display: flex;
@@ -152,5 +155,14 @@ const labelBack = lang === 'en' ? 'Back to Home' : 'Volver al Inicio';
     margin: 2rem 0; 
     width: 100%; 
     display: block; 
+  }
+
+  @media (max-width: 768px) {
+    /* Achicamos los márgenes de contenido para celulares */
+    .content-block { padding: 2rem 1.25rem; }
+    
+    /* Mantenemos el formato 50/50 y proporción vertical, solo reducimos espacios */
+    .page-hero-split { gap: 1.5rem; }
+    .hero-title-split { font-size: clamp(2.2rem, 6vw, 2.5rem); }
   }
 </style>

@@ -61,7 +61,7 @@ const getSocialSvg = (platform: string) => {
       )}
     </div>
 
-    <main class="content-block fondo-default" style="border-radius: var(--radius-card, 24px); box-shadow: 0 15px 40px rgba(0,0,0,0.04); padding: 4rem 3.5rem;">
+    <main class="content-block fondo-default" style="border-radius: var(--radius-card, 24px); box-shadow: 0 15px 40px rgba(0,0,0,0.04);">
       <article class="contenido-cliente">
         <Content />
       </article>
@@ -105,7 +105,9 @@ const getSocialSvg = (platform: string) => {
 </Layout>
 
 <style>
-  /* Mantuve TODOS tus estilos originales intactos */
+  /* Margen amplio para pantallas grandes */
+  .content-block { padding: 4rem 3.5rem; }
+
   .post-hero-wrapper { width: 100%; border-radius: var(--radius-card, 24px); overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.06); }
   .hero-aspect-ratio { width: 100%; padding-top: 56.25%; position: relative; background-size: cover; background-position: center; transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); }
   .post-hero-wrapper:hover .hero-aspect-ratio { transform: scale(1.04); }
@@ -125,7 +127,11 @@ const getSocialSvg = (platform: string) => {
   .contenido-cliente :global(p:has(img)) { opacity: 1 !important; }
   .contenido-cliente :global(h2), .contenido-cliente :global(h3) { margin-top: 2.5rem; margin-bottom: 1rem; color: var(--titulos-default-color); }
   .contenido-cliente :global(img) { border-radius: var(--radius-sm, 8px); margin: 2rem 0; width: 100%; display: block; }
+  
   @media (max-width: 768px) {
+    /* Aquí achicamos los márgenes para celulares */
+    .content-block { padding: 2rem 1.25rem; }
+    
     .author-capsule { flex-direction: column; text-align: center; padding: 3rem 2rem; gap: 1.5rem; }
     .author-text-container { align-items: center; }
     .author-socials-container { justify-content: center; width: 100%; }
