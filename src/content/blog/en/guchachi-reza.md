@@ -22,3 +22,9 @@ Below, I present fragments of the visual record of this project.
 ![Slaughter of the Iguanas - Photography by Juana Pola](/assets/images/guchachi03.jpeg "Like the iguanas")
 
 ![Cesarean scar - Photography by Juana Pola](/assets/images/guchachi04.jpeg "Marked forever")
+
+<div class="disclaimer-portafolio">
+  <strong>Copyright and Privacy Notice:</strong><br/>
+  All photographs and concepts in this portfolio are the intellectual property of Juana Pola. Commercial use or modification without explicit authorization is strictly prohibited. The reproduction of this material is permitted <strong>exclusively for press, reviews, cultural dissemination, and non-profit uses</strong>, provided that proper credit is given to the author.<br/><br/>
+  Furthermore, absolute respect for the integrity and privacy of the individuals portrayed is demanded; their images must not be decontextualized. For commercial licensing, acquisitions, or collaborations, please get in touch directly.
+</div>

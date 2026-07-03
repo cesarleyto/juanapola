@@ -22,3 +22,9 @@ A continuación, presento fragmentos del registro visual de este proyecto.
 ![Matanza de las Iguanas - Fotografía de Juana Pola](/assets/images/guchachi03.jpeg "Como las iguanas")
 
 ![Cicatriz de cesárea - Fotografía de Juana Pola](/assets/images/guchachi04.jpeg "Marcadas para siempre")
+
+<div class="disclaimer-portafolio">
+  <strong>Derechos de Obra y Privacidad:</strong><br/>
+  Todas las fotografías y conceptos en este portafolio son propiedad intelectual de Juana Pola. Queda estrictamente prohibido su uso comercial o modificación sin autorización explícita. Se permite la reproducción de este material <strong>exclusivamente para fines de prensa, reseñas, difusión cultural y usos sin fines de lucro</strong>, siempre y cuando se otorgue el crédito correspondiente a la autora.<br/><br/>
+  Asimismo, se exige absoluto respeto a la integridad y privacidad de las personas retratadas. Su imagen no debe ser descontextualizada. Para licenciamientos comerciales, adquisiciones o colaboraciones, por favor establece contacto directo.
+</div>

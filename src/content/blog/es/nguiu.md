@@ -24,3 +24,9 @@ A continuación, presento fragmentos del registro visual de este proyecto.
 ![Amor lésbico en el Istmo de Tehuantepec - Fotografía de Juana Pola](/assets/images/nguiu03.jpeg "Amor de seda")
 
 ![Disidencias Sexuales en el Istmo de Tehuantepec - Fotografía de Juana Pola](/assets/images/nguiu04.jpeg "Nuestra coraza es transparente: el momento en que dejamos de ocultarnos para empezar a ser vistas.")
+
+<div class="disclaimer-portafolio">
+  <strong>Derechos de Obra y Privacidad:</strong><br/>
+  Todas las fotografías y conceptos en este portafolio son propiedad intelectual de Juana Pola. Queda estrictamente prohibido su uso comercial o modificación sin autorización explícita. Se permite la reproducción de este material <strong>exclusivamente para fines de prensa, reseñas, difusión cultural y usos sin fines de lucro</strong>, siempre y cuando se otorgue el crédito correspondiente a la autora.<br/><br/>
+  Asimismo, se exige absoluto respeto a la integridad y privacidad de las personas retratadas. Su imagen no debe ser descontextualizada. Para licenciamientos comerciales, adquisiciones o colaboraciones, por favor establece contacto directo.
+</div>

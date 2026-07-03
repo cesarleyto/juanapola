@@ -9,6 +9,11 @@ const settings = settingsObj.default || settingsObj;
 const { title, address, email, telefonos = [] } = settings;
 const currentYear = new Date().getFullYear();
 
+// Leyenda legal dinámica para el footer
+const footerDisclaimer = lang === 'en' 
+  ? 'All rights reserved.'
+  : 'Todos los derechos reservados.';
+
 const getContactIcon = (tipo: string) => {
   const t = tipo.toLowerCase();
   if (t === 'whatsapp') {
@@ -59,8 +64,29 @@ const getContactIcon = (tipo: string) => {
 
   <hr style="width: 100%; max-width: 850px; border: none; border-top: 1px solid rgba(255, 255, 255, 0.15); margin: 0.5rem 0 0;" />
 
-  <div style="font-size: 0.85rem; opacity: 0.8; font-weight: 500; letter-spacing: 0.02em;">
-    &copy; {currentYear} {title}
+  <div style="font-size: 0.85rem; opacity: 0.8; font-weight: 500; letter-spacing: 0.02em; text-align: center; max-width: 600px; line-height: 1.5;">
+    &copy; {currentYear} {title}. {footerDisclaimer}
   </div>
 
 </footer>
+
+<style is:global>
+  /* Este estilo afectará el HTML que pegues en tus archivos .md */
+  .disclaimer-portafolio {
+    margin-top: 4rem;
+    padding: 1.5rem 2rem;
+    background-color: rgba(0, 0, 0, 0.03); /* Un fondo súper sutil */
+    border-radius: var(--radius-sm, 8px);
+    font-size: 0.85rem; /* Letra chiquita */
+    line-height: 1.6;
+    color: var(--texto-default-color);
+    opacity: 0.75; /* Ligeramente transparente para quitarle peso visual */
+    font-family: var(--font-mono); /* Tipografía monoespaciada para darle un toque más legal/documental */
+  }
+  
+  .disclaimer-portafolio strong {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    opacity: 1;
+  }
+</style>

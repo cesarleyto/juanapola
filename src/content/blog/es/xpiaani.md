@@ -26,3 +26,9 @@ A continuación, presento fragmentos del registro visual de este proyecto.
 ![Xpianni' es su forma de ser - Fotografía de Juana Pola](/assets/images/xpianni03.jpeg "Xpianni' es su forma de ser")
 
 ![Cosijopii es un niño tormenta - Fotografía de Juana Pola](/assets/images/xpianni04.jpeg "Cosijopii es un niño tormenta")
+
+<div class="disclaimer-portafolio">
+  <strong>Derechos de Obra y Privacidad:</strong><br/>
+  Todas las fotografías y conceptos en este portafolio son propiedad intelectual de Juana Pola. Queda estrictamente prohibido su uso comercial o modificación sin autorización explícita. Se permite la reproducción de este material <strong>exclusivamente para fines de prensa, reseñas, difusión cultural y usos sin fines de lucro</strong>, siempre y cuando se otorgue el crédito correspondiente a la autora.<br/><br/>
+  Asimismo, se exige absoluto respeto a la integridad y privacidad de las personas retratadas. Su imagen no debe ser descontextualizada. Para licenciamientos comerciales, adquisiciones o colaboraciones, por favor establece contacto directo.
+</div>

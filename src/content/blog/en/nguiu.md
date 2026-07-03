@@ -24,3 +24,9 @@ Below, I present fragments of the visual record of this project.
 ![Lesbian love in the Isthmus of Tehuantepec - Photography by Juana Pola](/assets/images/nguiu03.jpeg "Silk Love")
 
 ![Sexual Dissidence in the Isthmus of Tehuantepec - Photography by Juana Pola](/assets/images/nguiu04.jpeg "Our armor is transparent: the moment we stop hiding to begin being seen.")
+
+<div class="disclaimer-portafolio">
+  <strong>Copyright and Privacy Notice:</strong><br/>
+  All photographs and concepts in this portfolio are the intellectual property of Juana Pola. Commercial use or modification without explicit authorization is strictly prohibited. The reproduction of this material is permitted <strong>exclusively for press, reviews, cultural dissemination, and non-profit uses</strong>, provided that proper credit is given to the author.<br/><br/>
+  Furthermore, absolute respect for the integrity and privacy of the individuals portrayed is demanded; their images must not be decontextualized. For commercial licensing, acquisitions, or collaborations, please get in touch directly.
+</div>
