@@ -2,7 +2,6 @@
 /* src/pages/[lang]/blog/index.astro */
 import { getCollection } from 'astro:content';
 import Layout from '../../../layouts/Layout.astro';
-import blogSettings from '../../../data/blog-settings.json';
 
 export async function getStaticPaths() {
   return [{ params: { lang: 'es' } }, { params: { lang: 'en' } }];
@@ -10,8 +9,13 @@ export async function getStaticPaths() {
 
 const { lang } = Astro.params;
 
-const blogTitle = blogSettings?.title || "Nuestro Blog";
-const blogDesc = blogSettings?.description || "Explora nuestras últimas noticias y artículos.";
+// 1. Cargamos el archivo de configuración de forma dinámica según el idioma
+const settingsFiles = import.meta.glob('../../../data/blog-settings*.json', { eager: true });
+const settingsObj = (settingsFiles[`../../../data/blog-settings-${lang}.json`] || settingsFiles['../../../data/blog-settings.json']) as any;
+const blogSettings = settingsObj.default || settingsObj;
+
+const blogTitle = blogSettings?.title || (lang === 'en' ? "Our Blog" : "Nuestro Blog");
+const blogDesc = blogSettings?.description || (lang === 'en' ? "Explore our latest news and articles." : "Explora nuestras últimas noticias y artículos.");
 
 const allPosts = await getCollection('blog');
 // FILTRO DINÁMICO: usa el parámetro de la URL
