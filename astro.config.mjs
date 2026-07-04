@@ -3,7 +3,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   // Ponemos el subdominio temporal
-  site: 'https://juanapola.yaga.haus',
+  site: 'https://juanapola.com',
   
   integrations: [
     sitemap()
