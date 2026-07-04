@@ -1,8 +1,11 @@
 {
   "title": "JUANA POLA",
-  "description": "I am a visual artist focused on women, sex-disident identities, and the fluid identities of the territory. From Oaxaca to the world. Discover my worldview through my work and my lens.",
+  "description": "I am a visual artist focused on women, sex-disident identities, and the fluid identities of the territory. Discover my worldview through my work and my lens.",
   "image": "/assets/images/juana-pola.jpg",
   "botones": [
-    { "texto": "ABOUT ME", "url": "/en/juanapola" }
+    {
+      "texto": "ABOUT ME",
+      "url": "/en/juanapola"
+    }
   ]
 }

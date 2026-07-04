@@ -47,7 +47,7 @@ Mi formación ha sido constante en espacios clave de la fotografía en México, 
 
 ![Exploración personal](/assets/images/juana-pola-4.jpeg)
 
-## Formación Académica
+## Formación
 
 * **Licenciatura en Expresión y Producción Artística**, UBBJ - Sede Ixtepec, Oaxaca (2019-2022).
 * **Residencia Laboratorio Editorial para la producción de fotolibros**, FOCCO 2025, impartida por Clara Forero, Santiago Escobar-Jaramillo y Victor Galeano (Chile).
